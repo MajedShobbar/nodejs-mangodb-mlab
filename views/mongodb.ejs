@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+
+  <div class="container">
+    <h1>Show the result of all documents for ORDERS</h1>
+    <ul>
+        <% results.forEach(function(r) { %>
+      <li><%= r.Item_Code %> - <%= r.Item_Name %>
+          (Price:<%=r.Price %>,  QTY:<%=r.QTY %> )
+      </li>
+        <% }); %>
+    </ul>
+  </div>
+  </body>
+
+
+</html>
