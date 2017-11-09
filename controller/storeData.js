@@ -11,14 +11,14 @@ router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
 
 
-module.exports.index = function(req, res, next) { 
+module.exports.index = function (req, res, next) {
 
-    res.render('test', { title: 'CS at CSUEB Majed' }); 
+    res.render('test', {title: 'CS at CSUEB Majed'});
 
 };
 
 
-module.exports.saveData = function(req, res, next) {
+module.exports.saveData = function (req, res, next) {
 
     var shipmentID;
 
@@ -51,7 +51,7 @@ module.exports.saveData = function(req, res, next) {
         shipment.insertOne(shipment_info, function (err, result) {
             if (err) throw err;
 
-            shipmentID=result._id;
+            shipmentID = resul.value._id
         });
         //shipment info collection operation
 
@@ -60,9 +60,9 @@ module.exports.saveData = function(req, res, next) {
         var payment_info = JSON.parse(req.body.payment_info);
         var payment = db.collection('payment_info');
 
-       /* payment.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*/
+        /* payment.deleteMany({}, function (err, result) {
+             if (err) throw err;
+         });*/
 
         payment.insertOne(payment_info, function (err, result) {
             if (err) throw err;
@@ -73,7 +73,7 @@ module.exports.saveData = function(req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '3- Your order has been saved and will process shortly'+' -- '+shipmentID})
+        res.render('test', {title: '3- Your order has been saved and will process shortly' + ' -- ' + shipmentID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
