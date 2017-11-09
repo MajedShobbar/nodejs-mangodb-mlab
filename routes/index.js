@@ -71,10 +71,10 @@ router.post('/savedata', function (req, res, next) {
             if (err) throw err;
         });
 
-        shipment.insertMany(shipment_info, function (err, result) {
+        /*shipment.insertMany(shipment_info, function (err, result) {
             if (err) throw err;
 
-        });
+        });*/
         //shipment info collection operation
 
         var session_basketString = JSON.stringify(req.body.shipment_info);
