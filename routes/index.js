@@ -75,11 +75,24 @@ router.post('/savedata', function (req, res, next) {
         });
         //shipment info collection operation
 
+
+        //payment info collection operation
         var payment_info = JSON.parse(req.body.payment_info);
+        var payment = db.collection('payment_info');
+
+        payment.deleteMany({}, function (err, result) {
+            if (err) throw err;
+        });
+
+        payment.insertOne(payment_info, function (err, result) {
+            if (err) throw err;
+
+        });
+        //payment info collection operation
 
 
         var session_basketString = JSON.stringify(req.body.payment_info);
-        res.send('Response is 1 ' + ' -- ' + session_basketString);
+        res.send('Response is 3 ' + ' -- ' + session_basketString);
 
         /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
