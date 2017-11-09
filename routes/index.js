@@ -53,8 +53,8 @@ router.post('/savedata', function (req, res, next) {
         });
     });//end of connect*/
 
-    res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
-
+    //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
+        res.send(" you have the respons");
 
 });
 
