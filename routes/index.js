@@ -50,10 +50,9 @@ router.post('/savedata', function (req, res, next) {
         var payment_info = JSON.parse(req.body.payment_info);
         var session_basket = JSON.parse(req.body.session_basket);
 
-        //get collection of routes
+        //Order collection operation
         var Orders = db.collection('ORDERS');
 
-// Note that the  insert method can take either an array or a dict.
         Orders.deleteMany({}, function (err, result) {
             if (err) throw err;
         });
@@ -61,10 +60,24 @@ router.post('/savedata', function (req, res, next) {
         Orders.insertMany(session_basket, function (err, result) {
             if (err) throw err;
 
-            var session_basketString = JSON.stringify(req.body.session_basket);
-            res.send('Response is 6 ' + ' -- ' + result.statusCode + ' -- ' + session_basketString);
+        });
+        //Order collection operation
+
+        //shipment info collection operation
+        var shipment = db.collection('shipment_info');
+
+        shipment.deleteMany({}, function (err, result) {
+            if (err) throw err;
         });
 
+        shipment.insertMany(shipment_info, function (err, result) {
+            if (err) throw err;
+
+        });
+        //Order collection operation
+
+        var session_basketString = JSON.stringify(req.body.shipment_info);
+        res.send('Response is 7 ' + ' -- ' + result.statusCode + ' -- ' + session_basketString);
 
         /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
