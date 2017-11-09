@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var controllerstoreData = require('../controllers/storeData');
+var controllerstoreData = require('../controller/storeData');
 
 
 var mongodb = require('mongodb');
