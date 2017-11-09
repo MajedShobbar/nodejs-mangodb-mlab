@@ -57,8 +57,8 @@ router.post('/savedata', function (req, res, next) {
         Orders.insertMany(session_basket, function (err, result) {
             if (err) throw err;
 
-            var session_basket = JSON.stringify(req.body.session_basket);
-            res.send('Response is 5 '+' -- '+ result.toString() + ' -- ' + session_basket);
+            var session_basketString = JSON.stringify(req.body.session_basket);
+            res.send('Response is 5 ' + ' -- ' + result.toString() + ' -- ' + session_basketString);
         });
 
 
