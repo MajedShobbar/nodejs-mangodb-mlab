@@ -51,7 +51,7 @@ module.exports.saveData = function (req, res, next) {
         shipment.insertOne(shipment_info, function (err, result) {
             if (err) throw err;
 
-            shipmentID = result.value._id
+            shipmentID = result.valueOf()._id;
         });
         //shipment info collection operation
 
@@ -73,7 +73,7 @@ module.exports.saveData = function (req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '5- Your order has been saved and will process shortly' + ' -- ' + shipmentID})
+        res.render('test', {title: '6- Your order has been saved and will process shortly' + ' -- ' + shipmentID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
