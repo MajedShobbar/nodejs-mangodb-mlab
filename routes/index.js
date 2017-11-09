@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://Majed:1234567890@ds155315.mlab.com:55315/heroku_m6qrxb6d';
+var bodyParser = require("body-parser");
+router.use(bodyParser.urlencoded({extended: true}));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -54,7 +56,9 @@ router.post('/savedata', function (req, res, next) {
     });//end of connect*/
 
     //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
-        res.send('Response is 2 '+req.body.add1);
+
+        var Array = req.body.data;
+        res.send('Response is 4 '+Array["add1"]);
 
 });
 
