@@ -27,9 +27,9 @@ module.exports.saveData = function(req, res, next) {
         var session_basket = JSON.parse(req.body.session_basket);
         var Orders = db.collection('ORDERS');
 
-        Orders.deleteMany({}, function (err, result) {
+        /*Orders.deleteMany({}, function (err, result) {
             if (err) throw err;
-        });
+        });*/
 
         Orders.insertMany(session_basket, function (err, result) {
             if (err) throw err;
@@ -42,9 +42,9 @@ module.exports.saveData = function(req, res, next) {
         var shipment_info = JSON.parse(req.body.shipment_info);
         var shipment = db.collection('shipment_info');
 
-        shipment.deleteMany({}, function (err, result) {
+        /*shipment.deleteMany({}, function (err, result) {
             if (err) throw err;
-        });
+        });*/
 
         shipment.insertOne(shipment_info, function (err, result) {
             if (err) throw err;
@@ -57,9 +57,9 @@ module.exports.saveData = function(req, res, next) {
         var payment_info = JSON.parse(req.body.payment_info);
         var payment = db.collection('payment_info');
 
-        payment.deleteMany({}, function (err, result) {
+       /* payment.deleteMany({}, function (err, result) {
             if (err) throw err;
-        });
+        });*/
 
         payment.insertOne(payment_info, function (err, result) {
             if (err) throw err;
@@ -69,8 +69,8 @@ module.exports.saveData = function(req, res, next) {
 
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
-        res.send('1- Your order has been saved and will process shortly');
-        //res.sendFile('test.ejs', {root: __dirname })
+        //res.send('2- Your order has been saved and will process shortly');
+        res.render('test', {title: '2- Your order has been saved and will process shortly'})
 
         //close connection when your app is terminating.
         db.close(function (err) {
