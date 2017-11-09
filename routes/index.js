@@ -71,7 +71,7 @@ router.post('/savedata', function (req, res, next) {
     //res.send("hello " + value_name);
 
         //var arr = req.body;
-        res.send('Response is 6 '+ req.body.session_basket+' -- '+ shipment_info.add1+' -- '+shipment_info[1]);
+        res.send('Response is 7 '+ req.body.session_basket+' -- '+ shipment_info[0].add1+' -- '+shipment_info[0]);
 
 });
 
