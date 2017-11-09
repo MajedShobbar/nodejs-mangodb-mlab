@@ -63,7 +63,7 @@ router.post('/savedata', function (req, res, next) {
         //Order collection operation
 
 
-       /* //shipment info collection operation
+       //shipment info collection operation
         var shipment_info = JSON.parse(req.body.shipment_info);
         var shipment = db.collection('shipment_info');
 
@@ -71,14 +71,14 @@ router.post('/savedata', function (req, res, next) {
             if (err) throw err;
         });
 
-        shipment.insertOne(shipment_info, function (err, result) {
+        /*shipment.insertMany(shipment_info, function (err, result) {
             if (err) throw err;
 
-        });
-        //shipment info collection operation*/
+        });*/
+        //shipment info collection operation
 
         var session_basketString = JSON.stringify(req.body.shipment_info);
-        res.send('Response is 8 ' + ' -- ' + session_basketString);
+        res.send('Response is 9 ' + ' -- ' + session_basketString);
 
         /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
