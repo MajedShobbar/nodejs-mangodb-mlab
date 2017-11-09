@@ -46,8 +46,6 @@ router.post('/savedata', function (req, res, next) {
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
 
-        var payment_info = JSON.parse(req.body.payment_info);
-
         //Order collection operation
         var session_basket = JSON.parse(req.body.session_basket);
         var Orders = db.collection('ORDERS');
@@ -77,8 +75,11 @@ router.post('/savedata', function (req, res, next) {
         });
         //shipment info collection operation
 
-        var session_basketString = JSON.stringify(req.body.shipment_info);
-        res.send('Response is 11 ' + ' -- ' + session_basketString);
+        var payment_info = JSON.parse(req.body.payment_info);
+
+
+        var session_basketString = JSON.stringify(req.body.payment_info);
+        res.send('Response is 1 ' + ' -- ' + session_basketString);
 
         /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
