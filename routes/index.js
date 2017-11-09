@@ -93,7 +93,7 @@ router.post('/savedata', function (req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('Your order has been saved and will process shortly');
-        res.sendFile('views/mongodb.ejs', {root: __dirname })
+        res.sendFile('views/test.ejs', {root: __dirname })
 
         //close connection when your app is terminating.
         db.close(function (err) {
