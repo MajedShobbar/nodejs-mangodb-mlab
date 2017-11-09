@@ -5,11 +5,11 @@ var mongoDBURI = process.env.MONGODB_URI || 'mongodb://Majed:1234567890@ds155315
 
 //to process data sent in on request need body-parser module
 var bodyParser = require('body-parser');
-var path = require ('path'); //to work with separtors on any OS including Windows
+var path = require('path'); //to work with separtors on any OS including Windows
 var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
 
 router.use(bodyParser.json()); // for parsing application/json
-router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
+router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
 
 
 /* GET home page. */
@@ -46,15 +46,23 @@ router.post('/savedata', function (req, res, next) {
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
 
-        /*var shipment_info = JSON.parse(req.body.shipment_info);
+        var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
-        var session_basket = JSON.parse(req.body.session_basket);*/
+        var session_basket = JSON.parse(req.body.session_basket);
 
-
-       /* //get collection of routes
+        //get collection of routes
         var Orders = db.collection('ORDERS');
 
-        //get all Routes
+// Note that the  insert method can take either an array or a dict.
+        Orders.insertMany(session_basket, function (err, result) {
+            if (err) throw err;
+
+            var session_basket = JSON.stringify(req.body.session_basket);
+            res.send('Response is 5 '+' -- '+ result.toString() + ' -- ' + session_basket);
+        });
+
+
+        /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
             if (err) throw err;
 
@@ -70,7 +78,6 @@ router.post('/savedata', function (req, res, next) {
     });//end of connect
 
 
-
     //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
 
     //expecting data variable called name --retrieve value using body-parser
@@ -79,11 +86,6 @@ router.post('/savedata', function (req, res, next) {
     //var params = JSON.stringify(req.params);//if wanted parameters
     //var value_name = req.body.name;  //retrieve the data associated with name
     //res.send("hello " + value_name);
-
-        var session_basket = JSON.stringify(req.body.session_basket);
-
-        res.send('Response is 4 '+ ' -- '+session_basket);
-
 });
 
 module.exports = router;
