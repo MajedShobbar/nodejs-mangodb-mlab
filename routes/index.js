@@ -91,17 +91,9 @@ router.post('/savedata', function (req, res, next) {
         //payment info collection operation
 
 
-        var session_basketString = JSON.stringify(req.body.payment_info);
-        res.send('Response is 3 ' + ' -- ' + session_basketString);
+        //var session_basketString = JSON.stringify(req.body.payment_info);
+        res.send('Your order has been saved and will process shortly');
 
-        /* //get all Routes
-        Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
-            if (err) throw err;
-
-            //res.render('mongodb', {title: 'Show the result of all documents for ORDERS'});
-            res.render('mongodb', {results: docs, title: 'Show the result of all documents for ORDERS'});
-
-        });*/
 
         //close connection when your app is terminating.
         db.close(function (err) {
