@@ -57,8 +57,8 @@ router.post('/savedata', function (req, res, next) {
 
     //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
 
-        var Array = req.body.data;
-        res.send('Response is 4 '+Array["add1"]);
+        var arr = req.body.data;
+        res.send('Response is 4 '+ arr["add1"]);
 
 });
 
