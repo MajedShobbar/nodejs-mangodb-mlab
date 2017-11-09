@@ -2,8 +2,15 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://Majed:1234567890@ds155315.mlab.com:55315/heroku_m6qrxb6d';
-var bodyParser = require("body-parser");
-router.use(bodyParser.urlencoded({extended: true}));
+
+//to process data sent in on request need body-parser module
+var bodyParser = require('body-parser');
+var path = require ('path'); //to work with separtors on any OS including Windows
+var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
+
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -57,8 +64,14 @@ router.post('/savedata', function (req, res, next) {
 
     //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
 
-        var arr = req.body;
-        res.send('Response is 4 '+ arr["add1"]);
+    //expecting data variable called name --retrieve value using body-parser
+    //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
+    var params = JSON.stringify(req.params);//if wanted parameters
+    //var value_name = req.body.name;  //retrieve the data associated with name
+    //res.send("hello " + value_name);
+
+        //var arr = req.body;
+        res.send('Response is 4 '+ params["add1"]);
 
 });
 
