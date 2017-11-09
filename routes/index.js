@@ -54,7 +54,7 @@ router.post('/savedata', function (req, res, next) {
     });//end of connect*/
 
     //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
-        res.send(req.body.session_basket);
+        res.send('Response is '+req.body.session_basket);
 
 });
 
