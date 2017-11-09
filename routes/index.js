@@ -71,14 +71,14 @@ router.post('/savedata', function (req, res, next) {
             if (err) throw err;
         });
 
-        /*shipment.insertMany(shipment_info, function (err, result) {
+        shipment.insertMany(shipment_info, function (err, result) {
             if (err) throw err;
 
-        });*/
+        });
         //shipment info collection operation
 
         var session_basketString = JSON.stringify(req.body.shipment_info);
-        res.send('Response is 9 ' + ' -- ' + session_basketString);
+        res.send('Response is 10 ' + ' -- ' + session_basketString);
 
         /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
