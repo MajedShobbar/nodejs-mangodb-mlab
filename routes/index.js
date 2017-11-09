@@ -66,13 +66,15 @@ router.post('/savedata', function (req, res, next) {
 
     //expecting data variable called name --retrieve value using body-parser
     //var shipment_info = JSON.stringify(req.body.shipment_info);  //if wanted entire body as JSON
-    var shipment_info = JSON.parse(req.body.shipment_info);  //if wanted entire body as JSON
+    var shipment_info = JSON.parse(req.body.shipment_info);
+    var payment_info = JSON.parse(req.body.payment_info);
+    var session_basket = JSON.parse(req.body.session_basket);
     //var params = JSON.stringify(req.params);//if wanted parameters
     //var value_name = req.body.name;  //retrieve the data associated with name
     //res.send("hello " + value_name);
 
         //var arr = req.body;
-        res.send('Response is 1 '+ req.body.session_basket+' -- '+ shipment_info+' -- '+shipment_info["add1"]);
+        res.send('Response is 2 '+ shipment_info["phone"] +' -- '+ payment_info["nameoncard"]+' -- '+session_basket[0]["name"]);
 
 });
 
