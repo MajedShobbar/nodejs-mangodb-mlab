@@ -46,11 +46,10 @@ router.post('/savedata', function (req, res, next) {
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
 
-        var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
-        var session_basket = JSON.parse(req.body.session_basket);
 
         //Order collection operation
+        var session_basket = JSON.parse(req.body.session_basket);
         var Orders = db.collection('ORDERS');
 
         Orders.deleteMany({}, function (err, result) {
@@ -63,21 +62,23 @@ router.post('/savedata', function (req, res, next) {
         });
         //Order collection operation
 
-        //shipment info collection operation
+
+       /* //shipment info collection operation
+        var shipment_info = JSON.parse(req.body.shipment_info);
         var shipment = db.collection('shipment_info');
 
         shipment.deleteMany({}, function (err, result) {
             if (err) throw err;
         });
 
-        shipment.insertMany(shipment_info, function (err, result) {
+        shipment.insertOne(shipment_info, function (err, result) {
             if (err) throw err;
 
         });
-        //Order collection operation
+        //shipment info collection operation*/
 
         var session_basketString = JSON.stringify(req.body.shipment_info);
-        res.send('Response is 7 ' + ' -- ' + result.statusCode + ' -- ' + session_basketString);
+        res.send('Response is 8 ' + ' -- ' + session_basketString);
 
         /* //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
