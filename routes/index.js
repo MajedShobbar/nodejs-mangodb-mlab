@@ -54,11 +54,15 @@ router.post('/savedata', function (req, res, next) {
         var Orders = db.collection('ORDERS');
 
 // Note that the  insert method can take either an array or a dict.
+        Orders.deleteMany({}, function (err, result) {
+            if (err) throw err;
+        });
+
         Orders.insertMany(session_basket, function (err, result) {
             if (err) throw err;
 
             var session_basketString = JSON.stringify(req.body.session_basket);
-            res.send('Response is 5 ' + ' -- ' + result.toString() + ' -- ' + session_basketString);
+            res.send('Response is 6 ' + ' -- ' + result.statusCode + ' -- ' + session_basketString);
         });
 
 
@@ -77,15 +81,6 @@ router.post('/savedata', function (req, res, next) {
         });
     });//end of connect
 
-
-    //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
-
-    //expecting data variable called name --retrieve value using body-parser
-    //var shipment_info = JSON.stringify(req.body.shipment_info);  //if wanted entire body as JSON
-
-    //var params = JSON.stringify(req.params);//if wanted parameters
-    //var value_name = req.body.name;  //retrieve the data associated with name
-    //res.send("hello " + value_name);
 });
 
 module.exports = router;
