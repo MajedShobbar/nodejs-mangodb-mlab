@@ -43,10 +43,17 @@ router.get('/mongodb', function (req, res, next) {
 
 router.post('/savedata', function (req, res, next) {
 
-    /*mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
+    mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
-        //get collection of routes
+
+        /*var shipment_info = JSON.parse(req.body.shipment_info);
+        var payment_info = JSON.parse(req.body.payment_info);
+        var session_basket = JSON.parse(req.body.session_basket);*/
+
+
+       /* //get collection of routes
         var Orders = db.collection('ORDERS');
+
         //get all Routes
         Orders.find({}).sort({Item_Code: 1}).toArray(function (err, docs) {
             if (err) throw err;
@@ -54,27 +61,28 @@ router.post('/savedata', function (req, res, next) {
             //res.render('mongodb', {title: 'Show the result of all documents for ORDERS'});
             res.render('mongodb', {results: docs, title: 'Show the result of all documents for ORDERS'});
 
-        });
+        });*/
 
         //close connection when your app is terminating.
         db.close(function (err) {
             if (err) throw err;
         });
-    });//end of connect*/
+    });//end of connect
+
+
 
     //res.render('testshow', {orders: req.bod.session_basket, title: 'Test save 1'});
 
     //expecting data variable called name --retrieve value using body-parser
     //var shipment_info = JSON.stringify(req.body.shipment_info);  //if wanted entire body as JSON
-    var shipment_info = JSON.parse(req.body.shipment_info);
-    var payment_info = JSON.parse(req.body.payment_info);
-    var session_basket = JSON.parse(req.body.session_basket);
+
     //var params = JSON.stringify(req.params);//if wanted parameters
     //var value_name = req.body.name;  //retrieve the data associated with name
     //res.send("hello " + value_name);
 
-        //var arr = req.body;
-        res.send('Response is 2 '+ shipment_info["phone"] +' -- '+ payment_info["nameoncard"]+' -- '+session_basket[0]["name"]);
+        var session_basket = JSON.stringify(req.body.session_basket);
+
+        res.send('Response is 4 '+ ' -- '+session_basket);
 
 });
 
