@@ -20,7 +20,7 @@ module.exports.index = function (req, res, next) {
 
 module.exports.saveData = function (req, res, next) {
 
-    var customerID;
+    var customerID='1234';
 
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
@@ -35,12 +35,12 @@ module.exports.saveData = function (req, res, next) {
             if (err) throw err;
         });*/
 
-        var customerdata="{'FIRSTNAME':'', 'LASTNAME':'', 'STREET':'', 'CITY':'', 'STATE':'', 'ZIP':'', 'EMAIL':''}";
+        var customerdata={FIRSTNAME:'1', LASTNAME:'2', STREET:'3', CITY:'4', STATE:'5', ZIP:'6', EMAIL:'7'};
 
         CUSTOMERS.insertOne(customerdata, function (err, result) {
             if (err) throw err;
 
-            customerID = result.insertedIds[0];
+            //customerID = result.insertedIds[0];
         });
         //customer collection operation
 
