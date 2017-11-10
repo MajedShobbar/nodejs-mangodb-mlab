@@ -75,6 +75,31 @@ module.exports.saveData = function (req, res, next) {
         //Bilining collection operation
 
 
+        //Order collection operation
+        var ORDERS = db.collection('ORDERS');
+        /*ORDERS.deleteMany({}, function (err, result) {
+            if (err) throw err;
+        });*/
+
+        var orderdata = {
+            CUSTOMERID: 'will set Later',
+            BILLINGID: 'will set Later',
+            DATE: new Date(),
+            PRODUCT_VECTOR: [session_basket],
+            ORDER_TOTAL: Object.keys(session_basket).length
+        };
+
+        ORDERS.insertOne(orderdata, function (err, result) {
+            if (err) throw err;
+
+            //customerID = result.insertedIds[0];
+        });
+        //Order collection operation
+
+
+
+
+
         /*//Order collection operation
         var Orders = db.collection('ORDERS');
 
