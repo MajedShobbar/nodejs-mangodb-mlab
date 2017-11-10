@@ -35,7 +35,7 @@ module.exports.saveData = function (req, res, next) {
             if (err) throw err;
         });*/
 
-        var customerdata={FIRSTNAME:"'"+shipment_info['fname']+"'", LASTNAME:'2', STREET:'3', CITY:'4', STATE:'5', ZIP:'6', EMAIL:'7'};
+        var customerdata={FIRSTNAME:shipment_info['fname'], LASTNAME:'2', STREET:'3', CITY:'4', STATE:'5', ZIP:'6', EMAIL:'7'};
 
         CUSTOMERS.insertOne(customerdata, function (err, result) {
             if (err) throw err;
@@ -90,7 +90,7 @@ module.exports.saveData = function (req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '3- Your order has been saved and will process shortly' + ' -- ' + customerID})
+        res.render('test', {title: '4- Your order has been saved and will process shortly' + ' -- ' + customerID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
