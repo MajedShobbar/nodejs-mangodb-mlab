@@ -20,7 +20,7 @@ module.exports.index = function (req, res, next) {
 
 module.exports.saveData = function (req, res, next) {
 
-    var customerID='1234';
+    var customerID = '1234';
 
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
@@ -35,8 +35,15 @@ module.exports.saveData = function (req, res, next) {
             if (err) throw err;
         });*/
 
-        var customerdata={FIRSTNAME:shipment_info['fname'], LASTNAME:shipment_info['lname'], STREET:shipment_info['add1']+' '+shipment_info['add2'],
-                          CITY:shipment_info['city'], STATE:shipment_info['state'], ZIP:shipment_info['zipcode'], PHONE:shipment_info['phone']};
+        var customerdata = {
+            FIRSTNAME: shipment_info['fname'],
+            LASTNAME: shipment_info['lname'],
+            STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
+            CITY: shipment_info['city'],
+            STATE: shipment_info['state'],
+            ZIP: shipment_info['zipcode'],
+            PHONE: shipment_info['phone']
+        };
 
         CUSTOMERS.insertOne(customerdata, function (err, result) {
             if (err) throw err;
@@ -44,6 +51,28 @@ module.exports.saveData = function (req, res, next) {
             //customerID = result.insertedIds[0];
         });
         //customer collection operation
+
+
+        //Bilining collection operation
+        var BILLING = db.collection('BILLING');
+        /*BILLING.deleteMany({}, function (err, result) {
+            if (err) throw err;
+        });*/
+
+        var bilingdata = {
+            CUSTOMERID: 'will set Later',
+            CREDITCARDTYPE: payment_info['cardtype'],
+            CREDITCARDNUM: payment_info['cardnumber'],
+            CREDITCARDEXP: payment_info['expdate'],
+            NAMEONCREDITCARD: payment_info['nameoncard']
+        };
+
+        BILLING.insertOne(bilingdata, function (err, result) {
+            if (err) throw err;
+
+            //customerID = result.insertedIds[0];
+        });
+        //Bilining collection operation
 
 
         /*//Order collection operation
@@ -91,7 +120,7 @@ module.exports.saveData = function (req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '5- Your order has been saved and will process shortly' + ' -- ' + customerID})
+        res.render('test', {title: '6- Your order has been saved and will process shortly' + ' -- ' + customerID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
