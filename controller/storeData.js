@@ -84,7 +84,7 @@ module.exports.saveData = function (req, res, next) {
         var orderdata = {
             CUSTOMERID: 'will set Later',
             BILLINGID: 'will set Later',
-            DATE: new Date(),
+            DATE: (new Date()).getDate().toString(),
             PRODUCT_VECTOR: session_basket,
             ORDER_TOTAL: Object.keys(session_basket).length
         };
@@ -145,7 +145,7 @@ module.exports.saveData = function (req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '8- Your order has been saved and will process shortly' + ' -- ' + customerID})
+        res.render('test', {title: '9- Your order has been saved and will process shortly' + ' -- ' + customerID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
