@@ -97,55 +97,30 @@ module.exports.saveData = function (req, res, next) {
         //Order collection operation
 
 
-
-
-
-        /*//Order collection operation
-        var Orders = db.collection('ORDERS');
-
-        /!*Orders.deleteMany({}, function (err, result) {
+        //Bilining collection operation
+        var SHIPPING = db.collection('SHIPPING');
+        /*SHIPPING.deleteMany({}, function (err, result) {
             if (err) throw err;
-        });*!/
+        });*/
 
-        Orders.insertMany(session_basket, function (err, result) {
+        var shipingdata = {
+            ORDERID: 'will set Later',
+            SHIPPING_STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
+            SHIPPING_CITY: shipment_info['city'],
+            SHIPPING_STATE: shipment_info['state'],
+            SHIPPING_ZIP: shipment_info['zipcode']
+        };
+
+        SHIPPING.insertOne(shipingdata, function (err, result) {
             if (err) throw err;
 
+            //customerID = result.insertedIds[0];
         });
-        //Order collection operation
-
-
-        //shipment info collection operation
-        var shipment = db.collection('shipment_info');
-
-        /!*shipment.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*!/
-
-        shipment.insertOne(shipment_info, function (err, result) {
-            if (err) throw err;
-
-            shipmentID = result.insertedId.toString();
-        });
-        //shipment info collection operation
-
-
-        //payment info collection operation
-        var payment = db.collection('payment_info');
-
-        /!* payment.deleteMany({}, function (err, result) {
-             if (err) throw err;
-         });*!/
-
-        payment.insertOne(payment_info, function (err, result) {
-            if (err) throw err;
-
-        });
-        //payment info collection operation*/
-
+        //Bilining collection operation
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '1- Your order has been saved and will process shortly' + ' -- ' + customerID})
+        res.render('test', {title: '2- Your order has been saved and will process shortly' + ' -- ' + customerID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
