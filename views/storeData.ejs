@@ -50,9 +50,9 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7">
             <h1>Shippment information</h1>
             <span><b>Full Name: </b></span><%= shipment_info['fname'] + ' ' + shipment_info['lname'] %><br>
-            <span><b>  Address: </b></span><%= shipment_info['add1'] + "<br>" + " " + shipment_info['add2']
-            + "," + shipment_info['city'] + "," + shipment_info['state'] + "," + shipment_info['zipcode'] + "<br>"; %>
-            <span><b>    phone: </b></span><%= shipment_info['phone'] + "<br>"; %>
+            <span><b>  Address: </b></span><%= shipment_info['add1'] %><br>
+            <%= shipment_info['add2'] + "," + shipment_info['city'] + "," + shipment_info['state'] + "," + shipment_info['zipcode'] %><br>
+            <span><b>    phone: </b></span><%= shipment_info['phone'] %><br>;
 
             <%
             switch (shipment_info['delivary']) {
@@ -70,7 +70,7 @@
                     break;
             }
             %>
-            <span><b> Delivery: </b></span><%= delivary + "<br>" %>;
+            <span><b> Delivery: </b></span><%= delivary %> <br>
         </div>
         <div class="col-lg-2 hidden-sm hidden-md"></div>
     </div>
@@ -81,10 +81,10 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7">
 
             <h1>Payment information</h1>
-            <span><b> Card Type: </b></span><%= payment_info['cardtype'] + "<br>"; %>
-            <span><b>       Name on Card: </b></span><%= payment_info['nameoncard'] + "<br>"; %>
-            <span><b>Credite Card Number: </b></span><%= payment_info['cardnumber'] + "<br>"; %>
-            <span><b>  Address: </b></span><%= payment_info['add1'] + "<br>" + " " + payment_info['add2'] + "<br>"; %>
+            <span><b> Card Type: </b></span><%= payment_info['cardtype'] %> <br>
+            <span><b>       Name on Card: </b></span><%= payment_info['nameoncard'] %><br>
+            <span><b>Credite Card Number: </b></span><%= payment_info['cardnumber'] %><br>
+            <span><b>  Address: </b></span><%= payment_info['add1'] %> <br> <%= payment_info['add2'] %><br>
         </div>
         <div class="col-lg-2 hidden-sm hidden-md"></div>
     </div>
