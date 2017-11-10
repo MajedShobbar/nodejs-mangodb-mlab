@@ -119,7 +119,7 @@ module.exports.saveData = function (req, res, next) {
         });
         //Bilining collection operation
 
-        res.render('storeData', {title: '3- Your order has been saved and will process shortly' + ' -- ' + customerID,
+        res.render('storeData', {title: '4- Your order has been saved and will process shortly' + ' -- ' + customerID,
                     shipmentinfo:JSON.stringify(shipment_info),paymentinfo:JSON.stringify(payment_info),
                     sessionbasket:JSON.stringify(session_basket)});
 
