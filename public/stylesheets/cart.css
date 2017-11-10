@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+img {
+	width: 5em;
+	height: 5em;
+	float: center;
+	align-content:center;
+}
+
+.divformat {
+	background-color: #FFFDFD;
+	width: 8em;
+	height: 8em;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}

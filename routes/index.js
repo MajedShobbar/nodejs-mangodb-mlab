@@ -33,7 +33,7 @@ router.get('/mongodb', function (req, res, next) {
 
 });
 
-router.get('/savedata', controllerstoreData.index); //calls the controller code the function index
+router.get('/savedata', controllerstoreData.saveData); //calls the controller code the function index
 
 router.post('/savedata', controllerstoreData.saveData);
 

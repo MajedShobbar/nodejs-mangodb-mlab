@@ -119,13 +119,9 @@ module.exports.saveData = function (req, res, next) {
         });
         //Bilining collection operation
 
-        //var session_basketString = JSON.stringify(req.body.payment_info);
-        //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '1- Your order has been saved and will process shortly' + ' -- ' + customerID,
+        res.render('storeData', {title: '2- Your order has been saved and will process shortly' + ' -- ' + customerID,
                     shipmentinfo:JSON.stringify(shipment_info),paymentinfo:JSON.stringify(payment_info),
                     sessionbasket:JSON.stringify(session_basket)});
-
-        //res.render('test', {title: '4',shipmentinfo:shipment_info})
 
         //close connection when your app is terminating.
         db.close(function (err) {

@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/cart.css">
+    <link rel="stylesheet" href="/stylesheets/navigationbar.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        form {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            background: #F1F1F1
+        }
+
+        .tdformat {
+            width: 100%;
+        }
+
+        .textfieldformat {
+            width: 100%;
+            margin-left: 10px;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>Order Summery</title>
+
+    <%
+    shipment_info = JSON.parse(shipmentinfo);
+    payment_info = JSON.parse(paymentinfo);
+    session_basket = JSON.parse(sessionbasket);
+    %>
+
+</head>
+<body>
+<ul>
+    <li style="float:left; padding:20px"><a href="index.html">HomePage</a></li>
+    <li style="float:right; padding:20px"><a href="allproducts.html">Products Page</a></li>
+</ul>
+<br>
+
+<p><%= title %></p>
+
+<div class="container-fluid">
+    <!-- Shippment information -->
+    <div class="row">
+        <div class="col-lg-2 hidden-sm hidden-md"></div>
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7">
+            <h1>Shippment information</h1>
+            <span><b>Full Name: </b></span><%= shipment_info['fname'] + ' ' + shipment_info['lname'] %><br>
+            <span><b>  Address: </b></span><%= shipment_info['add1'] + "<br>" + " " + shipment_info['add2']
+            + "," + shipment_info['city'] + "," + shipment_info['state'] + "," + shipment_info['zipcode'] + "<br>"; %>
+            <span><b>    phone: </b></span><%= shipment_info['phone'] + "<br>"; %>
+
+            <%
+            switch (shipment_info['delivary']) {
+                case '1':
+                    delivary = '7-9 business day';
+                    break;
+                case '2':
+                    delivary = '3-5 business day';
+                    break;
+                case '3':
+                    delivary = '2 business day';
+                    break;
+                case '4':
+                    delivary = '1 business day';
+                    break;
+            }
+            %>
+            <span><b> Delivery: </b></span><%= delivary + "<br>" %>;
+        </div>
+        <div class="col-lg-2 hidden-sm hidden-md"></div>
+    </div>
+
+    <!-- Payment information -->
+    <div class="row">
+        <div class="col-lg-2 hidden-sm hidden-md"></div>
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7">
+
+            <h1>Payment information</h1>
+            <span><b> Card Type: </b></span><%= payment_info['cardtype'] + "<br>"; %>
+            <span><b>       Name on Card: </b></span><%= payment_info['nameoncard'] + "<br>"; %>
+            <span><b>Credite Card Number: </b></span><%= payment_info['cardnumber'] + "<br>"; %>
+            <span><b>  Address: </b></span><%= payment_info['add1'] + "<br>" + " " + payment_info['add2'] + "<br>"; %>
+        </div>
+        <div class="col-lg-2 hidden-sm hidden-md"></div>
+    </div>
+
+    <!-- Cart Information -->
+    <!--
+        <div class="row">
+            <div class="col-lg-2 hidden-sm hidden-md"></div>
+            <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5">
+                <h3 align="center">Item</h3>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <h3 align="center">Cost</h3>
+            </div>
+            <div class="col-lg-2 hidden-sm hidden-md"></div>
+        </div>
+        <?php
+
+          if ($_POST['isSubmited']!="YES"){
+    // if(isset($_SESSION['session_basket'])) echo 'it is set'.'<br>';
+        $session_basket = $_SESSION['session_basket'];
+
+        $totalPay = 0;
+        //reset($session_basket); //set pointer in array to first element
+
+        while(list($k, $v) = each ($session_basket)) {
+
+        echo "
+        <div class='row' style='text-align:center; vertical-align:middle;'>";
+            echo "
+            <div class='col-lg-2 hidden-sm hidden-md'></div>
+            ";
+
+            echo "
+            <div class='col-xs-12 col-sm-9 col-md-7 col-lg-5 divformat vertical-center' style='border:solid thin;'>";
+                echo "<img class='media-object img-rounded' alt='' src='img/". $session_basket[$k]->code .".jpg'>";
+                echo "<h4 style='padding-left:10px'>". $session_basket[$k]->name ."</h4>";
+                echo "
+            </div>
+            ";
+
+
+            echo "
+            <div class='col-xs-12 col-sm-3 col-md-2 col-lg-2 divformat'
+                 style='border-bottom:solid thin; border-right:solid thin; border-top:solid thin;'>";
+                echo "
+                <table width='100%' border='0'>";
+                    echo "
+                    <tbody>";
+                    echo "
+                    <tr>";
+                        echo "
+                        <td align='right'><h5>Price =&nbsp; </h5></td>
+                        ";
+                        echo "
+                        <td align='left'><span style='font-weight:bold;'>$ ".$session_basket[$k]->price."</span></td>
+                        ";
+                        echo "
+                    </tr>
+                    ";
+                    echo "
+                    <tr>";
+                        echo "
+                        <td align='right'><h5>QTY =&nbsp;</h5></td>
+                        ";
+                        echo "
+                        <td align='left'><span style='font-weight:bold;'>".$session_basket[$k]->quantity."</span></td>
+                        ";
+                        echo "
+                    </tr>
+                    ";
+                    echo "
+                    <tr>";
+                        echo "
+                        <td align='right'><h5>pay =&nbsp;</h5></td>
+                        ";
+                        $itempay = $session_basket[$k]->quantity * $session_basket[$k]->price;
+                        $totalPay = $totalPay + $itempay;
+                        echo "
+                        <td align='left'><span style='font-weight:bold;'>$ ". $itempay ."</span></td>
+                        ";
+                        echo "
+                    </tr>
+                    ";
+                    echo "
+                    </tbody>
+                    ";
+                    echo "
+                </table>
+                ";
+
+                echo "
+            </div>
+            ";
+            echo "
+            <div class='col-lg-2 hidden-sm hidden-md'></div>
+            ";
+
+            echo "
+        </div>
+        ";
+
+
+        }
+
+
+        echo "
+        <div class='row' style='text-align:center; vertical-align:middle;'>";
+            echo "
+            <div class='col-lg-2 hidden-sm hidden-md'></div>
+            ";
+
+            echo "
+            <div class='col-xs-12 col-sm-9 col-md-7 col-lg-5' style='border:solid;'>";
+                echo "<h4 align='right'>shipping cost</h4>";
+                echo "<h4 align='right'>Total Cost</h4>";
+                echo "<h4 align='right'>Tax 8%</h4>";
+                echo "<h4 align='right'>You Pay</h4>";
+                echo "
+            </div>
+            ";
+
+            echo "
+            <div class='col-xs-12 col-sm-3 col-md-2 col-lg-2' style='border:solid;'>";
+                echo "<h4 align='left' style='padding-left:10px'>$ 2.0</h4>";
+                echo "<h4 align='left' style='padding-left:10px'>$ ". $totalPay ."</h4>";
+                echo "<h4 align='left' style='padding-left:10px'>$ ". number_format(($totalPay*8)/100,2) ."</h4>";
+                $totalPay = $totalPay + (($totalPay*8)/100) + 2;
+                echo "<h4 align='left' style='padding-left:10px'>$ ". number_format($totalPay,2) ."</h4>";
+                echo "
+            </div>
+            ";
+
+            echo "
+        </div>
+        ";
+
+        echo "
+        <div class='row' style='margin:10px;'>";
+            echo "
+            <div class='col-lg-2 hidden-sm hidden-md'></div>
+            ";
+
+            echo "
+            <div class='col-xs-12 col-sm-9 col-md-7 col-lg-5' align='right'></div>
+            ";
+
+            echo "
+            <div class='col-xs-12 col-sm-3 col-md-2 col-lg-2'>";
+                // echo "<a href='index.html' class='btn btn-default' style='width:100%'>Submit</a></div>
+            ";
+            echo "
+            <form action='ordersummery.php' method='post' style='width:100%;'>";
+                echo "<input type='hidden' id='isSubmited' name='isSubmited' value='YES'>";
+                echo "<input type='submit' name='submit' id='submit' value='Submit'
+                             style='width:100%; font-size: larger; color: #FFFFC0; background-color: teal; border: 2pt ridge lightgrey'>";
+                echo "
+            </form>
+            ";
+            echo "
+        </div>
+        ";
+
+        echo "
+        <div class='col-sm-2'></div>
+        ";
+    -->
+
+</div>
+
+</body>
+</html>
