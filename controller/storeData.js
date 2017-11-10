@@ -119,10 +119,16 @@ module.exports.saveData = function (req, res, next) {
         });
         //Bilining collection operation
 
+        var session_basket = JSON.parse(req.body.session_basket);
+        var shipment_info = JSON.parse(req.body.shipment_info);
+        var payment_info = JSON.parse(req.body.payment_info);
+
+
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '7- Your order has been saved and will process shortly' + ' -- ' + customerID,
-                    shipmentinfo:JSON.stringify(shipment_info)});
+        res.render('test', {title: '8- Your order has been saved and will process shortly' + ' -- ' + customerID,
+                    shipmentinfo:JSON.stringify(shipment_info),paymentinfo:JSON.stringify(payment_info),
+                    sessionbasket:JSON.stringify(session_basket)});
 
         //res.render('test', {title: '4',shipmentinfo:shipment_info})
 

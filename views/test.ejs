@@ -5,11 +5,15 @@
 
     <%
     shipment_info = JSON.parse(shipmentinfo);
+    payment_info = JSON.parse(paymentinfo);
+    session_basket = JSON.parse(sessionbasket);
     %>
 
 </head>
 <body>
 <p>Welcome to <%= title %></p>
 <p><%= shipment_info['fname'] + ' ' + shipment_info['lname'] %></p>
+<p><%= payment_info['cardnumber'] %></p>
+<p><%= session_basket['name'] %></p>
 </body>
 </html>
