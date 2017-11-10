@@ -108,7 +108,8 @@ module.exports.saveData = function (req, res, next) {
             SHIPPING_STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
             SHIPPING_CITY: shipment_info['city'],
             SHIPPING_STATE: shipment_info['state'],
-            SHIPPING_ZIP: shipment_info['zipcode']
+            SHIPPING_ZIP: shipment_info['zipcode'],
+            SHIPPING_DILIVERY: shipment_info['delivary']
         };
 
         SHIPPING.insertOne(shipingdata, function (err, result) {
@@ -120,7 +121,7 @@ module.exports.saveData = function (req, res, next) {
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '2- Your order has been saved and will process shortly' + ' -- ' + customerID})
+        res.render('test', {title: '4- Your order has been saved and will process shortly' + ' -- ' + customerID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
