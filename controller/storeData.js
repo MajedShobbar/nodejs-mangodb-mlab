@@ -20,18 +20,37 @@ module.exports.index = function (req, res, next) {
 
 module.exports.saveData = function (req, res, next) {
 
-    var shipmentID;
+    var customerID;
 
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
 
-        //Order collection operation
         var session_basket = JSON.parse(req.body.session_basket);
-        var Orders = db.collection('ORDERS');
+        var shipment_info = JSON.parse(req.body.shipment_info);
+        var payment_info = JSON.parse(req.body.payment_info);
 
-        /*Orders.deleteMany({}, function (err, result) {
+        //customer collection operation
+        var CUSTOMERS = db.collection('CUSTOMERS');
+        /*CUSTOMERS.deleteMany({}, function (err, result) {
             if (err) throw err;
         });*/
+
+        var customerdata="{'FIRSTNAME':'', 'LASTNAME':'', 'STREET':'', 'CITY':'', 'STATE':'', 'ZIP':'', 'EMAIL':''}";
+
+        CUSTOMERS.insertOne(customerdata, function (err, result) {
+            if (err) throw err;
+
+            customerID = result.insertedIds[0];
+        });
+        //customer collection operation
+
+
+        /*//Order collection operation
+        var Orders = db.collection('ORDERS');
+
+        /!*Orders.deleteMany({}, function (err, result) {
+            if (err) throw err;
+        });*!/
 
         Orders.insertMany(session_basket, function (err, result) {
             if (err) throw err;
@@ -41,12 +60,11 @@ module.exports.saveData = function (req, res, next) {
 
 
         //shipment info collection operation
-        var shipment_info = JSON.parse(req.body.shipment_info);
         var shipment = db.collection('shipment_info');
 
-        /*shipment.deleteMany({}, function (err, result) {
+        /!*shipment.deleteMany({}, function (err, result) {
             if (err) throw err;
-        });*/
+        });*!/
 
         shipment.insertOne(shipment_info, function (err, result) {
             if (err) throw err;
@@ -57,23 +75,22 @@ module.exports.saveData = function (req, res, next) {
 
 
         //payment info collection operation
-        var payment_info = JSON.parse(req.body.payment_info);
         var payment = db.collection('payment_info');
 
-        /* payment.deleteMany({}, function (err, result) {
+        /!* payment.deleteMany({}, function (err, result) {
              if (err) throw err;
-         });*/
+         });*!/
 
         payment.insertOne(payment_info, function (err, result) {
             if (err) throw err;
 
         });
-        //payment info collection operation
+        //payment info collection operation*/
 
 
         //var session_basketString = JSON.stringify(req.body.payment_info);
         //res.send('3- Your order has been saved and will process shortly');
-        res.render('test', {title: '1- Your order has been saved and will process shortly' + ' -- ' + shipmentID})
+        res.render('test', {title: '2- Your order has been saved and will process shortly' + ' -- ' + customerID})
 
         //close connection when your app is terminating.
         db.close(function (err) {
