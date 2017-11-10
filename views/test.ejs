@@ -2,9 +2,14 @@
 <html>
 <head>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <% passValue(myVar)
+    shipment_info = JSON.parse(shipmentinfo);
+    %>
+
 </head>
 <body>
 <p>Welcome to <%= title %></p>
-<p><%= shipmentinfo %></p>
+<p><%= shipment_info['fname'] + ' ' + shipment_info['lname'] %></p>
 </body>
 </html>
