@@ -28,7 +28,7 @@ module.exports.saveData = function (req, res, next) {
         var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
 
-        var customerID = '1234';
+        var customerID = ObjectID();
 
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
@@ -36,7 +36,8 @@ module.exports.saveData = function (req, res, next) {
             if (err) throw err;
         });*/
 
-        var customerdata = [{
+        var customerdata = {
+            _id:customerID,
             FIRSTNAME: shipment_info['fname'],
             LASTNAME: shipment_info['lname'],
             STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
@@ -44,7 +45,7 @@ module.exports.saveData = function (req, res, next) {
             STATE: shipment_info['state'],
             ZIP: shipment_info['zipcode'],
             PHONE: shipment_info['phone']
-        }];
+        };
 
         /*CUSTOMERS.insertOne(customerdata, function (err, result) {
             customerID ='5678';
@@ -54,7 +55,7 @@ module.exports.saveData = function (req, res, next) {
                 result.insertedId + " -- " + result.getInsertedIds().toString();
         });*/
 
-        CUSTOMERS.insertMany(customerdata, getRes);
+        CUSTOMERS.insertOne(customerdata, getRes);
 
         function getRes(err, result) {
             customerID = '5678';
@@ -131,7 +132,7 @@ module.exports.saveData = function (req, res, next) {
         //Bilining collection operation
 
         res.render('storeData', {
-            title: '1-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
+            title: '2-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
