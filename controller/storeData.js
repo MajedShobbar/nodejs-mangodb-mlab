@@ -46,13 +46,23 @@ module.exports.saveData = function (req, res, next) {
             PHONE: shipment_info['phone']
         };
 
-        CUSTOMERS.insertOne(customerdata, function (err, result) {
+        /*CUSTOMERS.insertOne(customerdata, function (err, result) {
             customerID ='5678';
             if (err) throw err;
 
             customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
                 result.insertedId + " -- " + result.getInsertedIds().toString();
-        });
+        });*/
+
+        CUSTOMERS.insertOne(customerdata, getResult());
+        function getResult(err, result) {
+            customerID ='5678';
+            if (err) throw err;
+
+            customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
+                result.insertedId + " -- " + result.getInsertedIds().toString();
+        }
+
         //customer collection operation
 
 
@@ -120,7 +130,7 @@ module.exports.saveData = function (req, res, next) {
         //Bilining collection operation
 
         res.render('storeData', {
-            title: '4-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
+            title: '5-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
