@@ -28,7 +28,7 @@ module.exports.saveData = function (req, res, next) {
         var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
 
-        var customerID = new ObjectID();
+        //var customerID = new ObjectID();
 
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
@@ -37,7 +37,7 @@ module.exports.saveData = function (req, res, next) {
         });*/
 
         var customerdata = {
-            _id: customerID,
+            _id: 154,
             FIRSTNAME: shipment_info['fname'],
             LASTNAME: shipment_info['lname'],
             STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
@@ -58,11 +58,11 @@ module.exports.saveData = function (req, res, next) {
         CUSTOMERS.insertOne(customerdata, getRes);
 
         function getRes(err, result) {
-            customerID = '5678';
+            //customerID = '5678';
             if (err) throw err;
 
-            customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
-                result.insertedId + " -- " + result.getInsertedIds().toString();
+            //customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
+            //    result.insertedId + " -- " + result.getInsertedIds().toString();
         }
 
         //customer collection operation
