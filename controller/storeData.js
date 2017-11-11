@@ -54,7 +54,7 @@ module.exports.saveData = function (req, res, next) {
                 result.insertedId + " -- " + result.getInsertedIds().toString();
         });*/
 
-        CUSTOMERS.insertOne(customerdata, getRes);
+        CUSTOMERS.insert(customerdata, getRes);
 
         function getRes(err, result) {
             customerID = '5678';
@@ -131,7 +131,7 @@ module.exports.saveData = function (req, res, next) {
         //Bilining collection operation
 
         res.render('storeData', {
-            title: '6-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
+            title: '7-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
