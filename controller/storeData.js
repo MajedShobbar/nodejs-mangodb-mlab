@@ -29,6 +29,8 @@ module.exports.saveData = function (req, res, next) {
         var payment_info = JSON.parse(req.body.payment_info);
 
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
 
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
@@ -48,23 +50,11 @@ module.exports.saveData = function (req, res, next) {
         };
 
         CUSTOMERS.insertOne(customerdata, function (err, result) {
-            //customerID ='5678';
-            if (err) throw err;
-
-            //customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
-                result.insertedId + " -- " + result.getInsertedIds().toString();
-        });
-
-        /*CUSTOMERS.insertOne(customerdata, getRes);
-
-        function getRes(err, result) {
-            //customerID = '5678';
             if (err) throw err;
 
             //customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
             //    result.insertedId + " -- " + result.getInsertedIds().toString();
-        }*/
-
+        });
         //customer collection operation
 
 
@@ -75,7 +65,8 @@ module.exports.saveData = function (req, res, next) {
         });*/
 
         var bilingdata = {
-            CUSTOMERID: 'will set Later',
+            _id: billingID,
+            CUSTOMER_ID: customerID,
             CREDITCARDTYPE: payment_info['cardtype'],
             CREDITCARDNUM: payment_info['cardnumber'],
             CREDITCARDEXP: payment_info['expdate'],
@@ -89,6 +80,32 @@ module.exports.saveData = function (req, res, next) {
         //Bilining collection operation
 
 
+        //Shipping collection operation
+        var SHIPPING = db.collection('SHIPPING');
+        /*SHIPPING.deleteMany({}, function (err, result) {
+            if (err) throw err;
+        });*/
+
+        //(_id, CUSTOMER_ID, SHIPPING_STREET, SHIPPING_CITY, SHIPPING_STATE, SHIPPING_ZIP)
+
+        var shipingdata = {
+            _id: shippingID,
+            CUSTOMER_ID: customerID,
+            SHIPPING_STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
+            SHIPPING_CITY: shipment_info['city'],
+            SHIPPING_STATE: shipment_info['state'],
+            SHIPPING_ZIP: shipment_info['zipcode'],
+            SHIPPING_DILIVERY: shipment_info['delivary']
+        };
+
+        SHIPPING.insertOne(shipingdata, function (err, result) {
+            if (err) throw err;
+
+        });
+        //Shipping collection operation
+
+
+        //(_id, CUSTOMER_ID, BILLING_ID, SHIPPING_ID, DATE, PRODUCT_VECTOR, ORDER_TOTAL)
         //Order collection operation
         var ORDERS = db.collection('ORDERS');
         /*ORDERS.deleteMany({}, function (err, result) {
@@ -96,8 +113,9 @@ module.exports.saveData = function (req, res, next) {
         });*/
 
         var orderdata = {
-            CUSTOMERID: 'will set Later',
-            BILLINGID: 'will set Later',
+            CUSTOMER_ID: customerID,
+            BILLING_ID: billingID,
+            SHIPPING_ID: shippingID,
             DATE: (new Date()).toDateString(),
             PRODUCT_VECTOR: session_basket,
             ORDER_TOTAL: Object.keys(session_basket).length
@@ -110,29 +128,8 @@ module.exports.saveData = function (req, res, next) {
         //Order collection operation
 
 
-        //Bilining collection operation
-        var SHIPPING = db.collection('SHIPPING');
-        /*SHIPPING.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*/
-
-        var shipingdata = {
-            ORDERID: 'will set Later',
-            SHIPPING_STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
-            SHIPPING_CITY: shipment_info['city'],
-            SHIPPING_STATE: shipment_info['state'],
-            SHIPPING_ZIP: shipment_info['zipcode'],
-            SHIPPING_DILIVERY: shipment_info['delivary']
-        };
-
-        SHIPPING.insertOne(shipingdata, function (err, result) {
-            if (err) throw err;
-
-        });
-        //Bilining collection operation
-
         res.render('storeData', {
-            title: '5-Your order has been Received and will be processed shortly' + ' -- ' + customerID.toString(),
+            title: '6-Your order has been Received and will be processed shortly' + ' -- ' + customerID.toString(),
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
