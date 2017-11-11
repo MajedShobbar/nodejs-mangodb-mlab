@@ -54,9 +54,10 @@ module.exports.saveData = function (req, res, next) {
                 result.insertedId + " -- " + result.getInsertedIds().toString();
         });*/
 
-        CUSTOMERS.insertOne(customerdata, getResult());
-        function getResult(err, result) {
-            customerID ='5678';
+        CUSTOMERS.insertOne(customerdata, getRes());
+
+        function getRes(err, result) {
+            customerID = '5678';
             if (err) throw err;
 
             customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
