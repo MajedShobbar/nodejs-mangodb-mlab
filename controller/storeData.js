@@ -28,7 +28,7 @@ module.exports.saveData = function (req, res, next) {
         var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
 
-        var customerID = new ObjectID();
+        //var customerID = new ObjectID();
 
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
