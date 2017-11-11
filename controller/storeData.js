@@ -48,7 +48,8 @@ module.exports.saveData = function (req, res, next) {
         CUSTOMERS.insertOne(customerdata, function (err, result) {
             if (err) throw err;
 
-            //customerID = result.insertedIds[0];
+            customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
+                result.insertedId + " -- " + result.getInsertedIds().toString();
         });
         //customer collection operation
 
@@ -119,9 +120,11 @@ module.exports.saveData = function (req, res, next) {
         });
         //Bilining collection operation
 
-        res.render('storeData', {title: 'Your order has been Received and will be processed shortly' + ' -- ' + customerID,
-                    shipmentinfo:JSON.stringify(shipment_info),paymentinfo:JSON.stringify(payment_info),
-                    sessionbasket:JSON.stringify(session_basket)});
+        res.render('storeData', {
+            title: 'Your order has been Received and will be processed shortly' + ' -- ' + customerID,
+            shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
+            sessionbasket: JSON.stringify(session_basket)
+        });
 
         //close connection when your app is terminating.
         db.close(function (err) {
