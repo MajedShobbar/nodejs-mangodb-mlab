@@ -129,7 +129,7 @@ module.exports.saveData = function (req, res, next) {
 
 
         res.render('storeData', {
-            title: '6-Your order has been Received and will be processed shortly' + ' -- ' + customerID.toString(),
+            title: 'Your order has been Received and will be processed shortly',
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
