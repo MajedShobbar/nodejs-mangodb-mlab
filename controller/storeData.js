@@ -20,7 +20,6 @@ module.exports.index = function (req, res, next) {
 
 module.exports.saveData = function (req, res, next) {
 
-    customerID = '1234';
 
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
@@ -28,6 +27,8 @@ module.exports.saveData = function (req, res, next) {
         var session_basket = JSON.parse(req.body.session_basket);
         var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
+
+        customerID = '1234';
 
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
@@ -46,6 +47,7 @@ module.exports.saveData = function (req, res, next) {
         };
 
         CUSTOMERS.insertOne(customerdata, function (err, result) {
+            customerID ='5678';
             if (err) throw err;
 
             customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
@@ -71,7 +73,6 @@ module.exports.saveData = function (req, res, next) {
         BILLING.insertOne(bilingdata, function (err, result) {
             if (err) throw err;
 
-            //customerID = result.insertedIds[0];
         });
         //Bilining collection operation
 
@@ -93,7 +94,6 @@ module.exports.saveData = function (req, res, next) {
         ORDERS.insertOne(orderdata, function (err, result) {
             if (err) throw err;
 
-            //customerID = result.insertedIds[0];
         });
         //Order collection operation
 
@@ -116,12 +116,11 @@ module.exports.saveData = function (req, res, next) {
         SHIPPING.insertOne(shipingdata, function (err, result) {
             if (err) throw err;
 
-            //customerID = result.insertedIds[0];
         });
         //Bilining collection operation
 
         res.render('storeData', {
-            title: '2-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
+            title: '3-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
