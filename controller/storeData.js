@@ -20,7 +20,7 @@ module.exports.index = function (req, res, next) {
 
 module.exports.saveData = function (req, res, next) {
 
-    var customerID = '1234';
+    customerID = '1234';
 
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
@@ -121,7 +121,7 @@ module.exports.saveData = function (req, res, next) {
         //Bilining collection operation
 
         res.render('storeData', {
-            title: '1-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
+            title: '2-Your order has been Received and will be processed shortly' + ' -- ' + customerID,
             shipmentinfo: JSON.stringify(shipment_info), paymentinfo: JSON.stringify(payment_info),
             sessionbasket: JSON.stringify(session_basket)
         });
