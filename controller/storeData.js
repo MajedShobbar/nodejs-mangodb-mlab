@@ -37,7 +37,6 @@ module.exports.saveData = function (req, res, next) {
         });*/
 
         var customerdata = {
-            _id: customerID.id,
             FIRSTNAME: shipment_info['fname'],
             LASTNAME: shipment_info['lname'],
             STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
