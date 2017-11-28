@@ -28,15 +28,13 @@ module.exports.storeData = function (req, res, next) {
         var shipment_info = JSON.parse(req.body.shipment_info);
         var payment_info = JSON.parse(req.body.payment_info);
 
+        //Create ID's for the customer and billing and shipping records
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
 
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
-        /*CUSTOMERS.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*/
 
         var customerdata = {
             _id: customerID,
@@ -52,17 +50,12 @@ module.exports.storeData = function (req, res, next) {
         CUSTOMERS.insertOne(customerdata, function (err, result) {
             if (err) throw err;
 
-            //customerID = result.insertedCount + " -- " + result.ok + " -- " + result.ops[0]._id + " -- " +
-            //    result.insertedId + " -- " + result.getInsertedIds().toString();
         });
         //customer collection operation
 
 
         //Bilining collection operation
         var BILLING = db.collection('BILLING');
-        /*BILLING.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*/
 
         var bilingdata = {
             _id: billingID,
@@ -82,11 +75,6 @@ module.exports.storeData = function (req, res, next) {
 
         //Shipping collection operation
         var SHIPPING = db.collection('SHIPPING');
-        /*SHIPPING.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*/
-
-        //(_id, CUSTOMER_ID, SHIPPING_STREET, SHIPPING_CITY, SHIPPING_STATE, SHIPPING_ZIP)
 
         var shipingdata = {
             _id: shippingID,
@@ -105,12 +93,12 @@ module.exports.storeData = function (req, res, next) {
         //Shipping collection operation
 
 
-        //(_id, CUSTOMER_ID, BILLING_ID, SHIPPING_ID, DATE, PRODUCT_VECTOR, ORDER_TOTAL)
         //Order collection operation
+        var total = 0;
+        for (var i = 0; i < session_basket.length; i++)
+            total = total + (session_basket[i].quantity * session_basket[i].price);
+
         var ORDERS = db.collection('ORDERS');
-        /*ORDERS.deleteMany({}, function (err, result) {
-            if (err) throw err;
-        });*/
 
         var orderdata = {
             CUSTOMER_ID: customerID,
@@ -118,8 +106,9 @@ module.exports.storeData = function (req, res, next) {
             SHIPPING_ID: shippingID,
             DATE: (new Date()).toDateString(),
             PRODUCT_VECTOR: session_basket,
-            ORDER_TOTAL: Object.keys(session_basket).length
+            ORDER_TOTAL: total
         };
+        //ORDER_TOTAL: Object.keys(session_basket).length
 
         ORDERS.insertOne(orderdata, function (err, result) {
             if (err) throw err;
@@ -134,7 +123,8 @@ module.exports.storeData = function (req, res, next) {
             sessionbasket: JSON.stringify(session_basket)
         });
 
-        //close connection when your app is terminating.
+
+        //close connection when The app is terminating.
         db.close(function (err) {
             if (err) throw err;
         });
