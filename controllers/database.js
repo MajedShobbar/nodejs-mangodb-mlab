@@ -98,6 +98,8 @@ module.exports.storeData = function (req, res, next) {
         for (var i = 0; i < session_basket.length; i++)
             total = total + (session_basket[i].quantity * session_basket[i].price);
 
+        total = total + ((total * 8) / 100) + 2;
+
         var ORDERS = db.collection('ORDERS');
 
         var orderdata = {
