@@ -106,7 +106,7 @@ module.exports.storeData = function (req, res, next) {
             SHIPPING_ID: shippingID,
             DATE: (new Date()).toDateString(),
             PRODUCT_VECTOR: session_basket,
-            ORDER_TOTAL: total
+            ORDER_TOTAL: '$ ' + total.toFixed(2)
         };
         //ORDER_TOTAL: Object.keys(session_basket).length
 
