@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var controllerstoreData = require('../controller/storeData');
+var controllerstoreData = require('../controllers/database');
 
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://Majed:1234567890@ds155315.mlab.com:55315/heroku_m6qrxb6d';
@@ -33,9 +33,9 @@ router.get('/mongodb', function (req, res, next) {
 
 });
 
-router.get('/savedata', controllerstoreData.saveData); //calls the controller code the function index
+router.get('/storeData', controllerstoreData.storeData); //calls the controllers code the function index
 
-router.post('/savedata', controllerstoreData.saveData);
+router.post('/storeData', controllerstoreData.storeData);
 
 
 module.exports = router;
